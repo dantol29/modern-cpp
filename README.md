@@ -18,37 +18,58 @@ for (int value : arr)
     std::cout << value;
 ```
 ### 3. Lambda Expressions: Anonymous function objects.
+
+**Syntax:** `[capture](parameters) -> return_type { body }`
+
+- By Value [=]: Captures all variables used in the lambda by value.
+- By Reference [&]: Captures all variables used in the lambda by reference.
+
+```
+int count = 0;
+std::for_each(numbers.begin(), numbers.end(), [&count](int n) {
+    count += n;
+});
+```
+### 4. Static Assertions: Compile-time assertions.
+It allows you to verify certain conditions during compilation rather than waiting for runtime execution.
+```
+static_assert(sizeof(int) == 4, "Integer size must be 4 bytes");
+```
+### 5. Rvalue References and Move Semantics: For efficient resource management.
+Steal the resources from the source object, leaving it in a valid but empty state.
+```
+// Move constructor
+ResourceHolder(ResourceHolder&& other) noexcept : data(other.data) {
+    other.data = nullptr;  // Move ownership, source becomes empty
+}
+
+ResourceHolder res1(100); // Allocate memory for res1
+ResourceHolder res2(std::move(res1)); // Move ownership to res2, res1 becomes empty
+```
+### 7. Uniform Initialization: Consistent syntax for initializing variables.
+```
+std::vector<int> data = {1, 4, 9};
+```
+### 8. Default and Deleted Functions: Specify default or disallowed special member functions.
+A mechanism for explicitly controlling the compiler's generation of special member functions.
+
+These are also known as the `Big Five` (Destructor, Default constructor, Copy constructor, Copy assignment operator, Move constructor, Move assignment operator)
+```
+class ResourceHolder {
+public:
+  // Use default compiler generated constructor
+  ResourceHolder() = default;
+
+  // Delete copy constructor and copy assignment operator
+  ResourceHolder(const ResourceHolder&) = delete;
+  ResourceHolder& operator=(const ResourceHolder&) = delete;
+};
+
+```
+### 9. Override and Final Specifiers: Enhancements for virtual functions.
 ```
 ```
-### 4. Nullptr: New keyword for the null pointer.
-```
-int* p = nullptr;
-```
-### 5. Static Assertions: Compile-time assertions.
-```
-```
-### 6. Rvalue References and Move Semantics: For efficient resource management.
-```
-```
-### 7. Explicit Conversion Operators: Allows explicit type conversions.
-```
-```
-### 8. Variadic Templates: Templates with a variable number of arguments.
-```
-```
-### 9. Template Aliases: Type aliases for templates.
-```
-```
-### 10. Uniform Initialization: Consistent syntax for initializing variables.
-```
-```
-### 11. Default and Deleted Functions: Specify default or disallowed special member functions.
-```
-```
-### 12. Override and Final Specifiers: Enhancements for virtual functions.
-```
-```
-### 13. New String Literals: Raw string literals for multi-line strings.
+### 10. New String Literals: Raw string literals for multi-line strings.
 ```
 ```
 </details>
